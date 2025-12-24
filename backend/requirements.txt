@@ -1,12 +1,12 @@
 # == API ==
-flask
-flask-cors # ACCESO A LA API
+Flask==3.1.2
+flask-cors==6.0.2 # ACCESO A LA API
 
 
 # == DB ==
-psycopg2-binary # CONEXIÓN POSTGRESQL
-flask-sqlalchemy # MODELOS / ORM 
-flask-migrate # MIGRACIONES
+psycopg2-binary==2.9.11 # CONEXIÓN POSTGRESQL
+Flask-SQLAlchemy==3.1.1 # MODELOS / ORM 
+Flask-Migrate==4.1.0 # MIGRACIONES
 
 # LEER .ENV
 python-dotenv

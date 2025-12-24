@@ -1,7 +1,11 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
+
 from .services import create_license_category
 
-license_category_bp = Blueprint("license_category_bp_v1", __name__, url_prefix="/api/v1/license-categories")
+license_category_bp = Blueprint(
+    "license_category_bp_v1", __name__, url_prefix="/api/v1/license-categories"
+)
+
 
 @license_category_bp.post("/")
 def create():
@@ -23,8 +27,13 @@ def create():
         raise
 
     # OK
-    return jsonify({
-        "id": category.id,
-        "name": category.name,
-        "created_at": category.created_at
-        }), 201
+    return (
+        jsonify(
+            {
+                "id": category.id,
+                "name": category.name,
+                "created_at": category.created_at,
+            }
+        ),
+        201,
+    )

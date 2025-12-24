@@ -1,0 +1,28 @@
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = ["backend"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+exclude = [
+    ".venv",
+    "migrations",
+    "__pycache__",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "B",
+]
+ignore = [
+    "E501",
+]

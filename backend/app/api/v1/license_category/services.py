@@ -1,6 +1,8 @@
+from sqlalchemy.exc import IntegrityError
+
 from backend.app.extensions import db
 from backend.db.models.license_category import LicenseCategory
-from sqlalchemy.exc import IntegrityError
+
 
 # == CREATE ==
 def create_license_category(name):
@@ -11,7 +13,7 @@ def create_license_category(name):
         db.session.add(category)
         db.session.commit()
         return category
-    except IntegrityError:
+    except IntegrityError as err:
         # ERROR
         db.session.rollback()
-        raise ValueError("LICENSE_CATEGORY_EXISTS")
+        raise ValueError("LICENSE_CATEGORY_EXISTS") from err
