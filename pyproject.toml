@@ -2,11 +2,6 @@
 line-length = 88
 target-version = ["py312"]
 
-[tool.isort]
-profile = "black"
-line_length = 88
-known_first_party = ["backend"]
-
 [tool.ruff]
 line-length = 88
 target-version = "py312"
@@ -17,12 +12,7 @@ exclude = [
 ]
 
 [tool.ruff.lint]
-select = [
-    "E",
-    "F",
-    "I",
-    "B",
-]
-ignore = [
-    "E501",
-]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]

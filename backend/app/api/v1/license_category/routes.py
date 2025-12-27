@@ -11,11 +11,11 @@ license_category_bp = Blueprint(
 def create():
     data = request.get_json()
 
-    # VALIDACIÓN
+    # VALIDATION
     if not data:
         return jsonify({"error": "El nombre es obligatorio"}), 400
 
-    # DATOS
+    # DATA
     name = data["name"]
 
     try:

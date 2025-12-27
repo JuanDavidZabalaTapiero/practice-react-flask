@@ -1,7 +1,7 @@
+from db.models.license_category import LicenseCategory
 from sqlalchemy.exc import IntegrityError
 
-from backend.app.extensions import db
-from backend.db.models.license_category import LicenseCategory
+from app.extensions import db
 
 
 # == CREATE ==
@@ -9,7 +9,7 @@ def create_license_category(name):
     category = LicenseCategory(name=name)
 
     try:
-        # GUARDAR
+        # SAVE
         db.session.add(category)
         db.session.commit()
         return category

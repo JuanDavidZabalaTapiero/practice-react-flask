@@ -2,7 +2,7 @@
 .venv/
 
 # VARIABLES DE ENTORNO
-.env
+.env*
 
 # CACHE
 __pycache__/

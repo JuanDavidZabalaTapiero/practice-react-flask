@@ -1,6 +1,5 @@
+from app.extensions import db
 from sqlalchemy import VARCHAR, BigInteger, DateTime, Identity, text
-
-from backend.app.extensions import db
 
 
 class LicenseCategory(db.Model):

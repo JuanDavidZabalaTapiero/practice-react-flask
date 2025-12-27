@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_cors import CORS
 
@@ -17,12 +19,17 @@ def create_app():
     migrate.init_app(app, db)  # MIGRATE
 
     # == MODELOS ==
-    from backend.db import models  # noqa: F401
+    from db import models  # noqa: F401
 
     # == BLUEPRINTS ==
     register_blueprints(app)
 
     # == CORS ==
-    CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
+    cors_origins = os.getenv("CORS_ORIGINS", "")  # ORIGINS IN .ENV
+    origins = [
+        origin.strip() for origin in cors_origins.split(",") if origin
+    ]  # SEPARATE ORIGINS
+
+    CORS(app, resources={r"/api/*": {"origins": origins}})
 
     return app
