@@ -7,5 +7,5 @@ export default function Home() {
     document.title = "Inicio | Mi App";
   }, []);
 
-  return <h1>Hola Mundo</h1>;
+  return <h1 className="text-center">Bienvenido 👋</h1>;
 }
