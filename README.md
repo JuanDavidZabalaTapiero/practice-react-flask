@@ -8,12 +8,12 @@
   - **ORM**: Flask-SQLAlchemy
   - **Migraciones**: Flask-Migrate
 - **Calidad de código**:
-    - black, isort, ruff
+    - black, ruff
     - pre-commit
 
 ### Frontend
 - **Framework**: React + Vite
-- **CSS y JS**: Bootstrap
+- **CSS, JS, icons**: Bootstrap
 - **Rutas**: react-routes-dom
 - **Calidad de código**:
   - Prettier, ESLint
@@ -28,7 +28,7 @@
 ```bash
 pre-commit install
 ```
-Esto ejecuta automáticamente `black`, `isort` y `ruff` al hacer commit.
+Esto ejecuta automáticamente `black` y `ruff` al hacer commit.
 
 
 ### Frontend

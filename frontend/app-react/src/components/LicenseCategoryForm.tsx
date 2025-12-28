@@ -3,6 +3,7 @@ export default function LicenseCategoryForm() {
     <form>
       <h2>Registrar Categoría</h2>
       <input type="text" placeholder="Nombre" />
+      <button>Registrar</button>
     </form>
   );
 }

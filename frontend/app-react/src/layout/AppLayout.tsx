@@ -10,12 +10,13 @@ export default function AppLayout() {
       {/* HEADER */}
       <Header />
 
-      {/* SIDEBAR + CONTENT */}
-      <div className="d-flex flex-grow-1">
+      {/* SIDEBAR + MAIN */}
+      <div className="flex-grow-1 w-100 d-flex">
+        {/* SIDEBAR */}
         <Sidebar />
 
-        <main className="flex-grow-1 p-4 bg-light">
-          {/* VARIABLE CONTENT */}
+        {/* MAIN CONTENT */}
+        <main className="flex-grow-1 p-3">
           <Outlet />
         </main>
       </div>
