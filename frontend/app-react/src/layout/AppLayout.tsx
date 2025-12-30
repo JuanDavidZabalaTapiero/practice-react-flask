@@ -4,6 +4,10 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
+// TOAST
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function AppLayout() {
   return (
     <div className="vh-100 d-flex flex-column">
@@ -20,6 +24,16 @@ export default function AppLayout() {
           <Outlet />
         </main>
       </div>
+
+      {/* TOASTS */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

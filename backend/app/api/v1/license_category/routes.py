@@ -12,12 +12,15 @@ def create():
     data = request.get_json()
 
     # VALIDATION
-    if not data:
+    if not data or "name" not in data:
         return jsonify({"error": "El nombre es obligatorio"}), 400
 
-    # DATA
-    name = data["name"]
+    name = data["name"].strip()
 
+    if not name:
+        return jsonify({"error": "El nombre no puede estar vacío"}), 400
+
+    # CREATE
     try:
         category = create_license_category(name)
     except ValueError as e:

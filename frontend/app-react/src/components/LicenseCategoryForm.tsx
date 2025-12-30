@@ -1,109 +1,111 @@
-// REACT IMPORTS
 import { useState } from "react";
-// API URL
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { API_URL } from "../config/api";
 
+type FormData = {
+  name: string;
+};
+
 export default function LicenseCategoryForm() {
-  // MESSAGES
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  // == FORM ==
-
-  // INPUTS
-  const [name, setName] = useState("");
-
-  // LOADING (WHEN SUBMITING)
+  // LOADING
   const [loading, setLoading] = useState(false);
 
-  // SUBMIT
-  const handleSubmit = async (e: React.FormEvent) => {
-    // STOP SUBMIT
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>();
 
-    // CLEAN MESSAGES
-    setError("");
-    setSuccess("");
-
-    // VALIDATION
-    if (!name.trim()) {
-      setError("El nombre es obligatorio");
-      return;
-    }
-
-    // FETCH API
+  const onSubmit = async (data: FormData) => {
     try {
       // LOADING ...
       setLoading(true);
 
-      const response = await fetch(`${API_URL}/api/v1/license-categories/`, {
+      const response = await fetch(`${API_URL}/license-categories/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify(data),
       });
 
-      // DATA
-      const data = await response.json();
+      // RESPONSE DATA
+      let responseData;
 
-      // RESPONSE: ERROR
+      try {
+        responseData = await response.json();
+      } catch {
+        responseData = null;
+      }
+
       if (!response.ok) {
-        setError(data.error);
+        toast.error(
+          responseData.error || "Ocurrió un error. Por favor intenta más tarde",
+        );
         return;
       }
 
-      // RESPONSE: OK
-      setSuccess("Categoría registrada correctamente");
+      toast.success("Categoría registrada correctamente");
 
-      // CLEAN INPUTS
-      setName("");
+      // RESET FORM
+      reset();
     } catch {
-      setError(
-        "Error de conexión con el servidor. Por favor intente más tarde",
-      );
+      toast.error("Ocurrió un error. Por favor intenta más tarde");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="row justify-content-center">
-      <div className="col-md-6 col-lg-5">
-        <div className="card shadow-sm">
-          <div className="card-body">
-            <h4 className="card-title mb-4 text-center">Registrar Categoría</h4>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="card shadow-sm">
+        <div className="card-body">
+          <h1 className="h4 mb-4 text-center">Registrar Categoría</h1>
 
-            {/* SUCCESS */}
-            {success && <div className="alert alert-success">{success}</div>}
+          {/* NOMBRE */}
+          <div className="mb-3">
+            <label className="form-label">Nombre</label>
 
-            {/* ERROR */}
-            {error && <div className="alert alert-danger">{error}</div>}
+            <input
+              type="text"
+              className={`form-control ${errors.name ? "is-invalid" : ""}`}
+              placeholder="Ej: A1, B1, C3"
+              {...register("name", {
+                required: "Completa este campo",
+                minLength: {
+                  value: 2,
+                  message: "Mínimo 2 caracteres",
+                },
+              })}
+              disabled={loading}
+            />
 
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label className="form-label">Nombre</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Ej: A1, B1, C3"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  disabled={loading}
+            {errors.name && (
+              <div className="invalid-feedback">{errors.name.message}</div>
+            )}
+          </div>
+
+          {/* BOTÓN */}
+          <div className="d-grid">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+            >
+              {loading && (
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
                 />
-              </div>
-
-              <button
-                type="submit"
-                className="btn btn-primary w-100"
-                disabled={loading}
-              >
-                {loading ? "Registrando..." : "Registrar"}
-              </button>
-            </form>
+              )}
+              {loading ? "Registrando..." : "Registrar"}
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

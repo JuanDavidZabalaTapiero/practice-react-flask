@@ -1,4 +1,3 @@
-// WHEN PAGE IS RENDERED
 import { useEffect } from "react";
 
 // COMPONENT

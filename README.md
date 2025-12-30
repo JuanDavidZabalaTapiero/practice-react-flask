@@ -15,6 +15,8 @@
 - **Framework**: React + Vite
 - **CSS, JS, icons**: Bootstrap
 - **Rutas**: react-routes-dom
+- **Mensajería**: react-toastify
+- **Formularios**: react-hook-form
 - **Calidad de código**:
   - Prettier, ESLint
 
