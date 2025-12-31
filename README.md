@@ -17,8 +17,7 @@
 - **Rutas**: react-routes-dom
 - **Mensajería**: react-toastify
 - **Formularios**: react-hook-form
-- **Calidad de código**:
-  - Prettier, ESLint
+- **Calidad de código**: Prettier, ESLint
 
 ---
 
@@ -63,9 +62,9 @@ pip install -r requirements-dev.txt
 
 ### Ejecutar Flask
 **Antes**: Tener el entorno virtual activo e instalar las dependencias.
-En la `raíz` del proyecto:
+En la carpeta `backend`:
 ```bash
-python -m backend.run
+python run.py
 ```
 La API quedará disponible por defecto en: http://localhost:5000
 
