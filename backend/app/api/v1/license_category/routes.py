@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 
+from .exceptions import LicenseCategoryExistsError
 from .services import create_license_category
 
 license_category_bp = Blueprint(
@@ -23,11 +24,9 @@ def create():
     # CREATE
     try:
         category = create_license_category(name)
-    except ValueError as e:
-        # ERROR
-        if str(e) == "LICENSE_CATEGORY_EXISTS":
-            return jsonify({"error": "Categoría ya registrada"}), 409
-        raise
+
+    except LicenseCategoryExistsError:
+        return jsonify({"error": "Categoría ya registrada"}), 409
 
     # OK
     return (
@@ -35,7 +34,7 @@ def create():
             {
                 "id": category.id,
                 "name": category.name,
-                "created_at": category.created_at,
+                "created_at": category.created_at.isoformat(),
             }
         ),
         201,
