@@ -17,6 +17,5 @@ def create_license_category(name):
         return category
 
     except IntegrityError as err:
-        # ERROR
         db.session.rollback()
         raise LicenseCategoryExistsError() from err

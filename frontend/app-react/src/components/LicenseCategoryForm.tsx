@@ -80,6 +80,7 @@ export default function LicenseCategoryForm() {
                 },
               })}
               disabled={loading}
+              autoComplete="off"
             />
 
             {errors.name && (
